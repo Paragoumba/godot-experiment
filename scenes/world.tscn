@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cm0xfd2mnxbey"]
+
+[ext_resource type="Script" path="res://scripts/world_gen.gd" id="1_u0tq3"]
+[ext_resource type="PackedScene" uid="uid://bro7cr7su37gb" path="res://scenes/block.tscn" id="2_3e4e8"]
+
+[node name="World" type="Node3D"]
+script = ExtResource("1_u0tq3")
+block = ExtResource("2_3e4e8")

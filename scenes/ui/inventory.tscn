@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://dbbn7f2xtxcup"]
+
+[ext_resource type="Script" path="res://scripts/inventory.gd" id="1_6nxxq"]
+[ext_resource type="PackedScene" uid="uid://ohhmp1ls10y5" path="res://scenes/ui/slot.tscn" id="2_i0hyk"]
+
+[node name="Panel" type="Panel"]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 650.0
+offset_bottom = 330.0
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 1
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 74.0
+offset_bottom = 74.0
+columns = 8
+script = ExtResource("1_6nxxq")
+slot_scene = ExtResource("2_i0hyk")
+
+[node name="Panel" parent="GridContainer" instance=ExtResource("2_i0hyk")]
+layout_mode = 2

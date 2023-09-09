@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://m3m8whqpsgak"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1bu1u"]
+shading_mode = 0
+albedo_color = Color(0, 0.937255, 0.941176, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_lrdr0"]
+material = SubResource("StandardMaterial3D_1bu1u")
+flip_faces = true
+
+[node name="Skybox" type="MeshInstance3D"]
+transform = Transform3D(1000, 0, 0, 0, 1000, 0, 0, 0, 1000, 0, 0, 0)
+top_level = true
+cast_shadow = 0
+mesh = SubResource("BoxMesh_lrdr0")
