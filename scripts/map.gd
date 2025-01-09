@@ -1,4 +1,7 @@
-extends Panel
+extends TextureRect
 
-func _process(delta):
-	pass
+func _ready():
+	get_node("/root/Root/World").connect("world_generated", handle_world_generated)
+
+func handle_world_generated(image: Image):
+	texture = ImageTexture.create_from_image(image)
