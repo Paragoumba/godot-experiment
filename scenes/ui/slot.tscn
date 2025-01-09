@@ -1,27 +1,53 @@
-[gd_scene load_steps=3 format=3 uid="uid://ohhmp1ls10y5"]
+[gd_scene load_steps=6 format=3 uid="uid://ohhmp1ls10y5"]
 
 [ext_resource type="Script" path="res://scripts/slot.gd" id="1_gka1x"]
-[ext_resource type="Texture2D" uid="uid://b7152clo15i3r" path="res://images/icon.svg" id="2_en0xc"]
+[ext_resource type="Texture2D" uid="uid://bmr6mqmnwo586" path="res://images/genericItems_spritesheet_colored.png" id="2_mj1sb"]
 
-[node name="Panel" type="Panel"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_1kstc"]
+resource_local_to_scene = true
+atlas = ExtResource("2_mj1sb")
+region = Rect2(136, 1231, 120, 110)
+
+[sub_resource type="SystemFont" id="SystemFont_sad2q"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_rm18m"]
+line_spacing = 0.0
+font = SubResource("SystemFont_sad2q")
+
+[node name="Slot" type="Panel"]
 custom_minimum_size = Vector2(64, 64)
 offset_right = 20.0
 offset_bottom = 20.0
 script = ExtResource("1_gka1x")
 metadata/_edit_use_anchors_ = true
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ItemTexture" type="TextureRect" parent="CenterContainer"]
 visible = false
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = SubResource("AtlasTexture_1kstc")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="StackSize" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = -0.03125
-anchor_top = -0.03125
-anchor_right = -0.03125
-anchor_bottom = -0.03125
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 offset_left = 2.0
-offset_top = 2.0
-offset_right = 130.0
-offset_bottom = 130.0
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_en0xc")
-metadata/_edit_use_anchors_ = true
+offset_top = -21.0
+offset_right = -2.0
+offset_bottom = -2.0
+grow_horizontal = 0
+grow_vertical = 0
+label_settings = SubResource("LabelSettings_rm18m")
+horizontal_alignment = 2

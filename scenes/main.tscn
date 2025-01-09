@@ -1,129 +1,251 @@
-[gd_scene load_steps=20 format=3 uid="uid://dn3mkma2wyumw"]
+[gd_scene load_steps=39 format=3 uid="uid://dn3mkma2wyumw"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_jraye"]
+[ext_resource type="PackedScene" uid="uid://bwkfyd51sh80k" path="res://scenes/ui/gui.tscn" id="2_5o12m"]
 [ext_resource type="PackedScene" uid="uid://cuhrjldcadvag" path="res://scenes/player.tscn" id="2_ysi0f"]
-[ext_resource type="Script" path="res://scripts/player.gd" id="3_b5srt"]
+[ext_resource type="Script" path="res://scripts/handler/player.gd" id="3_b5srt"]
+[ext_resource type="Script" path="res://scripts/gui.gd" id="3_s3r0t"]
 [ext_resource type="PackedScene" uid="uid://cm0xfd2mnxbey" path="res://scenes/world.tscn" id="4_k508y"]
-[ext_resource type="PackedScene" uid="uid://dbbn7f2xtxcup" path="res://scenes/ui/inventory.tscn" id="5_mehju"]
-[ext_resource type="PackedScene" uid="uid://dbgag38hi6plh" path="res://scenes/ui/map.tscn" id="6_q1i72"]
+[ext_resource type="Script" path="res://scripts/handler/god.gd" id="5_tbuek"]
+[ext_resource type="Texture2D" uid="uid://8ya7kymr6t05" path="res://images/Untitled.png" id="7_foply"]
 [ext_resource type="PackedScene" uid="uid://m3m8whqpsgak" path="res://scenes/skybox.tscn" id="7_glnhq"]
-[ext_resource type="Texture2D" uid="uid://1uph4iqqf47h" path="res://images/Sky_equirectangular-png_a_blue_planet_1848253138.png" id="8_ssjc2"]
-[ext_resource type="Script" path="res://scripts/enemy_move.gd" id="9_kqe4k"]
+[ext_resource type="Script" path="res://scripts/WorldBox.gd" id="7_wgti5"]
 [ext_resource type="PackedScene" uid="uid://dmeewm7omy0f8" path="res://scenes/enemy.tscn" id="10_3j03s"]
-[ext_resource type="PackedScene" uid="uid://da1qojelbp1ib" path="res://models/barrel.glb" id="11_ek1ml"]
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="10_fdlp7"]
+[ext_resource type="PackedScene" uid="uid://ctl52rh67clac" path="res://scenes/barrel.tscn" id="10_girek"]
+[ext_resource type="PackedScene" uid="uid://d30mbkihlpfwy" path="res://models/rim.glb" id="13_ik652"]
+[ext_resource type="Script" path="res://scenes/Basket.gd" id="14_35c4g"]
 
-[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_ybsfs"]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_a4ny7"]
+sky_top_color = Color(1, 0.121569, 0.47451, 1)
+sky_horizon_color = Color(0.768627, 0.545098, 0.628431, 1)
+ground_bottom_color = Color(0.0745098, 0.0588235, 0.0392157, 1)
+ground_horizon_color = Color(0.768627, 0.545098, 0.628431, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qgr1j"]
-albedo_color = Color(0.156863, 0.235294, 0.12549, 1)
+[sub_resource type="Sky" id="Sky_uuw5y"]
+sky_material = SubResource("ProceduralSkyMaterial_a4ny7")
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_0vf8w"]
-material = SubResource("StandardMaterial3D_qgr1j")
-size = Vector2(200, 200)
+[sub_resource type="Environment" id="Environment_mnvsp"]
+background_mode = 2
+sky = SubResource("Sky_uuw5y")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="PrismMesh" id="PrismMesh_roi85"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5bbe7"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jahii"]
+size = Vector3(51, 0.5, 51)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3aadf"]
+albedo_color = Color(0.180438, 0.415623, 0.775511, 1)
+albedo_texture = ExtResource("7_foply")
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_q03ws"]
+material = SubResource("StandardMaterial3D_3aadf")
+size = Vector3(51, 0.5, 51)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ihecg"]
 size = Vector3(200, 100, 200)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gu68p"]
-cull_mode = 1
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vp1wi"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_faudo"]
+material = SubResource("StandardMaterial3D_vp1wi")
+flip_faces = true
+size = Vector3(200, 100, 200)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7uvya"]
 shading_mode = 0
-albedo_texture = ExtResource("8_ssjc2")
+albedo_color = Color(0, 0.615686, 0.945098, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_fymdy"]
-material = SubResource("StandardMaterial3D_gu68p")
+material = SubResource("StandardMaterial3D_7uvya")
+flip_faces = true
 
-[sub_resource type="Curve3D" id="Curve3D_icded"]
-_data = {
-"points": PackedVector3Array(0, 0, 0, 2.5, 0, 0, 0, 0, -5, 0, 0, -2.5, 0, 0, 2.5, 5, 0, 0, 2.5, 0, 0, -2.5, 0, 0, 0, 0, 5, 0, 0, 2.5, 0, 0, -2.5, -5, 0, 0, -2.5, 0, 0, 0, 0, 0, 0, 0, -5),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
-}
-point_count = 5
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xe0kk"]
+bounce = 1.0
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_rlhqo"]
-height = 0.5
-radius = 0.25
+[sub_resource type="SphereShape3D" id="SphereShape3D_ysa0t"]
 
-[node name="Node3D" type="Node3D"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p54km"]
+albedo_color = Color(0.909804, 0.596078, 0.666667, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_p2iel"]
+material = SubResource("StandardMaterial3D_p54km")
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_gbvqb"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_ojuik"]
+size = Vector2(0.5, 5)
+
+[sub_resource type="QuadMesh" id="QuadMesh_3xcw8"]
+size = Vector2(0.5, 5)
+
+[sub_resource type="QuadMesh" id="QuadMesh_j7rfd"]
+size = Vector2(5, 0.5)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ajohh"]
+data = PackedVector3Array(0.7071, 0, 0.7071, 0, 0, 1, 0.6187, 0.125, 0.6187, 0.6187, 0.125, 0.6187, 0, 0, 1, 0, 0.125, 0.875, 0.6187, 0.125, 0.6187, 0, 0.125, 0.875, 0.5303, 0, 0.5303, 0.5303, 0, 0.5303, 0, 0.125, 0.875, 0, 0, 0.75, 0.5303, 0, 0.5303, 0, 0, 0.75, 0.6187, -0.125, 0.6187, 0.6187, -0.125, 0.6187, 0, 0, 0.75, 0, -0.125, 0.875, 0.6187, -0.125, 0.6187, 0, -0.125, 0.875, 0.7071, 0, 0.7071, 0.7071, 0, 0.7071, 0, -0.125, 0.875, 0, 0, 1, 1, 0, 0, 0.7071, 0, 0.7071, 0.875, 0.125, 0, 0.875, 0.125, 0, 0.7071, 0, 0.7071, 0.6187, 0.125, 0.6187, 0.875, 0.125, 0, 0.6187, 0.125, 0.6187, 0.75, 0, 0, 0.75, 0, 0, 0.6187, 0.125, 0.6187, 0.5303, 0, 0.5303, 0.75, 0, 0, 0.5303, 0, 0.5303, 0.875, -0.125, 0, 0.875, -0.125, 0, 0.5303, 0, 0.5303, 0.6187, -0.125, 0.6187, 0.875, -0.125, 0, 0.6187, -0.125, 0.6187, 1, 0, 0, 1, 0, 0, 0.6187, -0.125, 0.6187, 0.7071, 0, 0.7071, 0.7071, 0, -0.7071, 1, 0, 0, 0.6187, 0.125, -0.6187, 0.6187, 0.125, -0.6187, 1, 0, 0, 0.875, 0.125, 0, 0.6187, 0.125, -0.6187, 0.875, 0.125, 0, 0.5303, 0, -0.5304, 0.5303, 0, -0.5304, 0.875, 0.125, 0, 0.75, 0, 0, 0.5303, 0, -0.5304, 0.75, 0, 0, 0.6187, -0.125, -0.6187, 0.6187, -0.125, -0.6187, 0.75, 0, 0, 0.875, -0.125, 0, 0.6187, -0.125, -0.6187, 0.875, -0.125, 0, 0.7071, 0, -0.7071, 0.7071, 0, -0.7071, 0.875, -0.125, 0, 1, 0, 0, 0.2, -0.125, -1, 0, -0.125, -0.875, 0.6187, -0.125, -0.6187, 0, 0.125, -0.875, 0.6187, 0.125, -0.6187, 0, 0, -0.75, 0, 0, -0.75, 0.6187, 0.125, -0.6187, 0.5303, 0, -0.5304, 0, 0, -0.75, 0.5303, 0, -0.5304, 0, -0.125, -0.875, 0, -0.125, -0.875, 0.5303, 0, -0.5304, 0.6187, -0.125, -0.6187, 0, 0.125, -0.875, 0.2, 0.125, -1, 0.6187, 0.125, -0.6187, 0.6187, 0.125, -0.6187, 0.2, 0.125, -1, 0.2, 0.125, -1, 0.2, -0.125, -1, 0.6187, -0.125, -0.6187, 0.7071, 0, -0.7071, -0.6187, 0.125, -0.6187, 0, 0.125, -0.875, -0.5304, 0, -0.5304, -0.5304, 0, -0.5304, 0, 0.125, -0.875, 0, 0, -0.75, -0.5304, 0, -0.5304, 0, 0, -0.75, -0.6187, -0.125, -0.6187, -0.6187, -0.125, -0.6187, 0, 0, -0.75, 0, -0.125, -0.875, 0.7071, 0, -0.7071, 0.6187, 0.125, -0.6187, 0.2, 0.125, -1, -1, 0, 0, -0.7071, 0, -0.7071, -0.875, 0.125, 0, -0.875, 0.125, 0, -0.7071, 0, -0.7071, -0.6187, 0.125, -0.6187, -0.875, 0.125, 0, -0.6187, 0.125, -0.6187, -0.75, 0, 0, -0.75, 0, 0, -0.6187, 0.125, -0.6187, -0.5304, 0, -0.5304, -0.75, 0, 0, -0.5304, 0, -0.5304, -0.875, -0.125, 0, -0.875, -0.125, 0, -0.5304, 0, -0.5304, -0.6187, -0.125, -0.6187, -0.875, -0.125, 0, -0.6187, -0.125, -0.6187, -1, 0, 0, -1, 0, 0, -0.6187, -0.125, -0.6187, -0.7071, 0, -0.7071, -0.7071, 0, 0.7071, -1, 0, 0, -0.6187, 0.125, 0.6187, -0.6187, 0.125, 0.6187, -1, 0, 0, -0.875, 0.125, 0, -0.6187, 0.125, 0.6187, -0.875, 0.125, 0, -0.5304, 0, 0.5303, -0.5304, 0, 0.5303, -0.875, 0.125, 0, -0.75, 0, 0, -0.5304, 0, 0.5303, -0.75, 0, 0, -0.6187, -0.125, 0.6187, -0.6187, -0.125, 0.6187, -0.75, 0, 0, -0.875, -0.125, 0, -0.6187, -0.125, 0.6187, -0.875, -0.125, 0, -0.7071, 0, 0.7071, -0.7071, 0, 0.7071, -0.875, -0.125, 0, -1, 0, 0, 0, 0, 1, -0.7071, 0, 0.7071, 0, 0.125, 0.875, 0, 0.125, 0.875, -0.7071, 0, 0.7071, -0.6187, 0.125, 0.6187, 0, 0.125, 0.875, -0.6187, 0.125, 0.6187, 0, 0, 0.75, 0, 0, 0.75, -0.6187, 0.125, 0.6187, -0.5304, 0, 0.5303, 0, 0, 0.75, -0.5304, 0, 0.5303, 0, -0.125, 0.875, 0, -0.125, 0.875, -0.5304, 0, 0.5303, -0.6187, -0.125, 0.6187, 0, -0.125, 0.875, -0.6187, -0.125, 0.6187, 0, 0, 1, 0, 0, 1, -0.6187, -0.125, 0.6187, -0.7071, 0, 0.7071, 0.2, -0.125, -1, 0.2, 0.125, -1, -0.2, -0.125, -1, -0.2, -0.125, -1, 0.2, 0.125, -1, -0.2, 0.125, -1, -0.2, 0.125, -1, -0.2, 0.125, -1, -0.2, -0.125, -1, -0.2, -0.125, -1, -0.2, 0.125, -1, -0.2, -0.125, -1, -0.2, -0.125, -1, -0.2, 0.125, -1, -0.7071, 0, -0.7071, 0, -0.125, -0.875, 0.2, -0.125, -1, -0.2, -0.125, -1, -0.2, -0.125, -1, 0.2, -0.125, -1, -0.2, -0.125, -1, -0.2, -0.125, -1, 0.2, -0.125, -1, 0.2, -0.125, -1, 0.2, -0.125, -1, 0.7071, 0, -0.7071, 0.2, -0.125, -1, 0.2, -0.125, -1, 0.7071, 0, -0.7071, 0.2, 0.125, -1, 0.2, 0.125, -1, 0.7071, 0, -0.7071, 0.2, 0.125, -1, -0.2, 0.125, -1, 0.2, 0.125, -1, 0.2, 0.125, -1, 0.2, 0.125, -1, 0.2, 0.125, -1, -0.2, 0.125, -1, -0.2, 0.125, -1, 0.2, 0.125, -1, 0, 0.125, -0.875, -0.6187, -0.125, -0.6187, 0, -0.125, -0.875, -0.2, -0.125, -1, -0.2, -0.125, -1, -0.7071, 0, -0.7071, -0.6187, -0.125, -0.6187, -0.7071, 0, -0.7071, -0.2, 0.125, -1, -0.6187, 0.125, -0.6187, -0.2, 0.125, -1, 0, 0.125, -0.875, -0.6187, 0.125, -0.6187)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ogvt0"]
+height = 0.15
+radius = 0.85
+
+[node name="Root" type="Node3D"]
 script = ExtResource("1_jraye")
+playerHandler = ExtResource("3_b5srt")
+godHandler = ExtResource("5_tbuek")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_mnvsp")
+
+[node name="UI" parent="." instance=ExtResource("2_5o12m")]
+script = ExtResource("3_s3r0t")
 
 [node name="Player" parent="." instance=ExtResource("2_ysi0f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 script = ExtResource("3_b5srt")
 
-[node name="Camera3D" type="Camera3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+[node name="MovePointVis" type="MeshInstance3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("PrismMesh_roi85")
+
+[node name="MovePoint" type="Marker3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="CameraFirstPerson" type="Marker3D" parent="Player" groups=["camera_pos"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.2)
+
+[node name="FirstPersonCamera" type="Camera3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 0.879067, 0.476699, 0, -0.476699, 0.879067, 0, 0.5, -0.2)
+current = true
+fov = 60.0
+
+[node name="MousePos" type="MeshInstance3D" parent="Player/FirstPersonCamera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+mesh = SubResource("BoxMesh_5bbe7")
+skeleton = NodePath("../../..")
+
+[node name="ThirdPersonCamera" type="Camera3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 0.879067, 0.476699, 0, -0.476699, 0.879067, 0, 1.34651, 1.64259)
 fov = 60.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 2, 0)
 light_energy = 3.0
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="Platform" type="StaticBody3D" parent="."]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-shape = SubResource("WorldBoundaryShape3D_ybsfs")
+[node name="Spawn" type="Marker3D" parent="Platform"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
-mesh = SubResource("PlaneMesh_0vf8w")
+[node name="PlatformShape" type="CollisionShape3D" parent="Platform"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+shape = SubResource("BoxShape3D_jahii")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D"]
+[node name="PlatformMesh" type="MeshInstance3D" parent="Platform"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+mesh = SubResource("BoxMesh_q03ws")
+
+[node name="WorldBox" type="Area3D" parent="."]
+script = ExtResource("7_wgti5")
+
+[node name="WorldShape" type="CollisionShape3D" parent="WorldBox"]
 shape = SubResource("BoxShape3D_ihecg")
-disabled = true
+
+[node name="WorldShape2" type="MeshInstance3D" parent="WorldBox"]
+visible = false
+mesh = SubResource("BoxMesh_faudo")
 
 [node name="World" parent="." instance=ExtResource("4_k508y")]
-
-[node name="UI" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="Inventory" parent="UI" instance=ExtResource("5_mehju")]
-visible = false
-layout_mode = 2
-
-[node name="Map" parent="UI" instance=ExtResource("6_q1i72")]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -200.0
-offset_top = -200.0
-offset_right = 0.0
-offset_bottom = 0.0
-grow_horizontal = 0
-grow_vertical = 0
-mouse_filter = 2
-
-[node name="FloatingItem" type="TextureRect" parent="UI"]
-layout_mode = 2
-offset_right = 40.0
-offset_bottom = 40.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, -51)
 
 [node name="Skybox" parent="." instance=ExtResource("7_glnhq")]
+visible = false
 mesh = SubResource("SphereMesh_fymdy")
 
-[node name="Path3D" type="Path3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-visible = false
-curve = SubResource("Curve3D_icded")
+[node name="Enemy" parent="." groups=["enemy"] instance=ExtResource("10_3j03s")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.05, -2.09)
+script = ExtResource("10_fdlp7")
 
-[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
-transform = Transform3D(-4.371e-08, 0, -0.999969, 0, 1, 0, 0.999969, 0, -4.371e-08, 0, 0, -5)
-script = ExtResource("9_kqe4k")
+[node name="Barrel" parent="." instance=ExtResource("10_girek")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 
-[node name="Enemy" parent="Path3D/PathFollow3D" instance=ExtResource("10_3j03s")]
+[node name="Barrel2" parent="." instance=ExtResource("10_girek")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.475, -1)
 
-[node name="Barrel" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0804962, 1.83284, -4.24942)
+[node name="SpherePosition" type="Marker3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(0.984498, -0.0399682, -0.170781, 0.00633231, 0.981155, -0.193118, 0.175281, 0.189043, 0.966198, 0.0239697, 5.046, -74.003)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Barrel"]
-shape = SubResource("CylinderShape3D_rlhqo")
+[node name="SpherePosition2" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.80832, 1.36808, -1.96829)
 
-[node name="barrel" parent="Barrel" instance=ExtResource("11_ek1ml")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+[node name="Sphere" type="RigidBody3D" parent="." groups=["basketball"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.195744, 1.36808, -24.4858)
+mass = 500.0
+physics_material_override = SubResource("PhysicsMaterial_xe0kk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sphere"]
+shape = SubResource("SphereShape3D_ysa0t")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Sphere"]
+mesh = SubResource("SphereMesh_p2iel")
+
+[node name="Border" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -76)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Border"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("WorldBoundaryShape3D_gbvqb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Border"]
+mesh = SubResource("QuadMesh_ojuik")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Border"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 0)
+mesh = SubResource("QuadMesh_3xcw8")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Border"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
+mesh = SubResource("QuadMesh_3xcw8")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Border"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -10, 0)
+mesh = SubResource("QuadMesh_3xcw8")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Border"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 10, 0)
+mesh = SubResource("QuadMesh_3xcw8")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Border"]
+mesh = SubResource("QuadMesh_j7rfd")
+
+[node name="Basket" type="StaticBody3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, -74)
+script = ExtResource("14_35c4g")
+
+[node name="BasketCamera" type="Camera3D" parent="Basket"]
+transform = Transform3D(0.842035, 0.519531, -0.145137, -0.146568, 0.479292, 0.865331, 0.519129, -0.707366, 0.479727, -0.32, 2.228, 2.16)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Basket"]
+shape = SubResource("ConcavePolygonShape3D_ajohh")
+
+[node name="rim" parent="Basket" instance=ExtResource("13_ik652")]
+
+[node name="Area3D" type="Area3D" parent="Basket"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Basket/Area3D"]
+shape = SubResource("CylinderShape3D_ogvt0")
+
+[connection signal="debug_toggled" from="." to="UI" method="_on_node_3d_debug_toggled"]
+[connection signal="body_exited" from="WorldBox" to="WorldBox" method="_on_body_exited"]
+[connection signal="body_entered" from="Basket/Area3D" to="Basket" method="_on_area_3d_body_entered"]

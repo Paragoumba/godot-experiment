@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwkfyd51sh80k"]
+
+[ext_resource type="PackedScene" uid="uid://dbbn7f2xtxcup" path="res://scenes/ui/inventory.tscn" id="1_8h6rr"]
+[ext_resource type="PackedScene" uid="uid://dbgag38hi6plh" path="res://scenes/ui/map.tscn" id="2_lyixr"]
+
+[node name="UI" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="FloatingItem" type="TextureRect" parent="."]
+visible = false
+layout_mode = 2
+
+[node name="Inventory" parent="." instance=ExtResource("1_8h6rr")]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.0
+
+[node name="Map" parent="." instance=ExtResource("2_lyixr")]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+mouse_filter = 2
+
+[node name="Debug" type="Label" parent="."]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Debug mode on"
