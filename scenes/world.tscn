@@ -3,6 +3,13 @@
 [ext_resource type="Script" path="res://scripts/world_gen.gd" id="1_u0tq3"]
 [ext_resource type="PackedScene" uid="uid://bro7cr7su37gb" path="res://scenes/block.tscn" id="2_3e4e8"]
 
-[node name="World" type="Node3D"]
+
+[node name="World" type="StaticBody3D"]
 script = ExtResource("1_u0tq3")
 block = ExtResource("2_3e4e8")
+
+[node name="Shape" type="CollisionShape3D" parent="."]
+visible = false
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 0, -25)
