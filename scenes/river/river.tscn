@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://cv1cdgabmec2a"]
 
-[ext_resource type="Shader" path="res://scenes/river/water_shader.gdshader" id="1_thnxf"]
+[ext_resource type="Shader" path="res://shaders/water_shader.gdshader" id="1_thnxf"]
 [ext_resource type="Texture2D" uid="uid://bhceyfmawewjn" path="res://scenes/river/water.tres" id="2_wvfi3"]
 
 [sub_resource type="Gradient" id="Gradient_enmis"]
