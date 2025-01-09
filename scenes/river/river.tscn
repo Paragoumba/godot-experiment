@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=3 uid="uid://cv1cdgabmec2a"]
+
+[ext_resource type="Shader" path="res://scenes/river/water_shader.gdshader" id="1_thnxf"]
+[ext_resource type="Texture2D" uid="uid://bhceyfmawewjn" path="res://scenes/river/water.tres" id="2_wvfi3"]
+
+[sub_resource type="Gradient" id="Gradient_enmis"]
+offsets = PackedFloat32Array(0.475, 1)
+colors = PackedColorArray(0.266701, 0.484858, 1, 1, 0.498428, 0.795332, 0.884605, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_oc617"]
+noise_type = 2
+frequency = 0.0282
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_b5er5"]
+width = 1024
+color_ramp = SubResource("Gradient_enmis")
+noise = SubResource("FastNoiseLite_oc617")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xvojw"]
+render_priority = 0
+shader = ExtResource("1_thnxf")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/texture_albedo = ExtResource("2_wvfi3")
+shader_parameter/texture_metallic = SubResource("NoiseTexture2D_b5er5")
+
+[sub_resource type="QuadMesh" id="QuadMesh_78h1i"]
+material = SubResource("ShaderMaterial_xvojw")
+size = Vector2(20, 2)
+
+[node name="River" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("QuadMesh_78h1i")
