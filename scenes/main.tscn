@@ -5,11 +5,12 @@
 [ext_resource type="PackedScene" uid="uid://cuhrjldcadvag" path="res://scenes/player.tscn" id="2_ysi0f"]
 [ext_resource type="Script" path="res://scripts/handler/player.gd" id="3_b5srt"]
 [ext_resource type="Script" path="res://scripts/gui.gd" id="3_s3r0t"]
-[ext_resource type="PackedScene" uid="uid://cm0xfd2mnxbey" path="res://scenes/world.tscn" id="4_k508y"]
+[ext_resource type="PackedScene" uid="uid://cm0xfd2mnxbey" path="res://scenes/chunk.tscn" id="4_k508y"]
 [ext_resource type="Script" path="res://scripts/handler/god.gd" id="5_tbuek"]
 [ext_resource type="Texture2D" uid="uid://8ya7kymr6t05" path="res://images/Untitled.png" id="7_foply"]
 [ext_resource type="PackedScene" uid="uid://m3m8whqpsgak" path="res://scenes/skybox.tscn" id="7_glnhq"]
 [ext_resource type="Script" path="res://scripts/WorldBox.gd" id="7_wgti5"]
+[ext_resource type="Script" path="res://scripts/world.gd" id="9_eqd4h"]
 [ext_resource type="PackedScene" uid="uid://dmeewm7omy0f8" path="res://scenes/enemy.tscn" id="10_3j03s"]
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="10_fdlp7"]
 [ext_resource type="PackedScene" uid="uid://ctl52rh67clac" path="res://scenes/barrel.tscn" id="10_girek"]
@@ -163,8 +164,46 @@ shape = SubResource("BoxShape3D_ihecg")
 visible = false
 mesh = SubResource("BoxMesh_faudo")
 
-[node name="World" parent="." instance=ExtResource("4_k508y")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, -51)
+[node name="World" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+script = ExtResource("9_eqd4h")
+
+[node name="Chunk" parent="World" instance=ExtResource("4_k508y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -50)
+physics_material_override = SubResource("PhysicsMaterial_0yp2x")
+cz = -1
+
+[node name="Chunk2" parent="World" instance=ExtResource("4_k508y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, 0, -50)
+cx = -1
+cz = -1
+
+[node name="Chunk3" parent="World" instance=ExtResource("4_k508y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, 0, 0)
+cx = -1
+
+[node name="Chunk4" parent="World" instance=ExtResource("4_k508y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, 0, 50)
+cx = -1
+cz = 1
+
+[node name="Chunk5" parent="World" instance=ExtResource("4_k508y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 50)
+cz = 1
+
+[node name="Chunk6" parent="World" instance=ExtResource("4_k508y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, 50)
+cx = 1
+cz = 1
+
+[node name="Chunk7" parent="World" instance=ExtResource("4_k508y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, 0)
+cx = 1
+
+[node name="Chunk8" parent="World" instance=ExtResource("4_k508y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, -50)
+cx = 1
+cz = -1
 
 [node name="Skybox" parent="." instance=ExtResource("7_glnhq")]
 visible = false
