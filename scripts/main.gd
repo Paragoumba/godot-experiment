@@ -59,7 +59,7 @@ func _unhandled_input(event):
 			
 		elif event.is_action_pressed("debug"):
 			debug = !debug
-			emit_signal("debug_toggled")
+			debug_toggled.emit()
 			
 			var player = $Player
 			
