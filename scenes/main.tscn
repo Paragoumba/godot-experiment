@@ -15,7 +15,7 @@
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="10_fdlp7"]
 [ext_resource type="PackedScene" uid="uid://ctl52rh67clac" path="res://scenes/barrel.tscn" id="10_girek"]
 [ext_resource type="PackedScene" uid="uid://d30mbkihlpfwy" path="res://models/rim.glb" id="13_ik652"]
-[ext_resource type="Script" path="res://scenes/Basket.gd" id="14_35c4g"]
+[ext_resource type="Script" path="res://scripts/Basket.gd" id="14_35c4g"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_a4ny7"]
 sky_top_color = Color(1, 0.121569, 0.47451, 1)
@@ -287,4 +287,5 @@ shape = SubResource("CylinderShape3D_ogvt0")
 
 [connection signal="debug_toggled" from="." to="UI" method="_on_node_3d_debug_toggled"]
 [connection signal="body_exited" from="WorldBox" to="WorldBox" method="_on_body_exited"]
+[connection signal="ball_entered_basket" from="Basket" to="UI" method="_on_basket_ball_entered_basket"]
 [connection signal="body_entered" from="Basket/Area3D" to="Basket" method="_on_area_3d_body_entered"]
