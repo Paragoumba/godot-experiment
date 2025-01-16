@@ -1,12 +1,32 @@
-[gd_scene load_steps=2 format=3 uid="uid://dbgag38hi6plh"]
+[gd_scene load_steps=4 format=3 uid="uid://dbgag38hi6plh"]
 
+[ext_resource type="Script" path="res://scripts/map_player_pos.gd" id="1_qufky"]
 [ext_resource type="Script" path="res://scripts/map.gd" id="1_wqsjy"]
+[ext_resource type="Texture2D" uid="uid://citwf772y7p5t" path="res://images/icon.svg" id="2_4l1g0"]
 
-[node name="TextureRect" type="TextureRect"]
+[node name="CenterContainer" type="CenterContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1136.0
+offset_bottom = -632.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+script = ExtResource("1_qufky")
+
+[node name="Map" type="TextureRect" parent="."]
 texture_filter = 1
-offset_right = 100.0
-offset_bottom = 100.0
+clip_contents = true
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch_mode = 5
 script = ExtResource("1_wqsjy")
+
+[node name="Player" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = ExtResource("2_4l1g0")
+expand_mode = 1
