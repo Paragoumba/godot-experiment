@@ -6,6 +6,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 const MOUSE_SENSIVITY = 0.3
 const RAY_LENGTH = 5
+const GOD_GROUP = "god"
 
 @onready var inventory = $UI/Inventory
 @onready var map = $UI/Map
@@ -64,6 +65,11 @@ func _unhandled_input(event):
 			
 			player.set_script(godHandler if debug else playerHandler)
 			player.load_nodes()
+			
+			if debug:
+				player.add_to_group(GOD_GROUP)
+			else:
+				player.remove_from_group(GOD_GROUP)
 			
 			# TODO Fix ready not being run again in player
 			
