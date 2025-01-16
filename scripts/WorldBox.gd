@@ -1,6 +1,9 @@
 extends Area3D
 
 func _on_body_exited(body):
+	if body.is_in_group("god"):
+		pass
+
 	print(body.name + " has exited the world")
 	body.position = get_parent().get_node("Platform/Spawn").position
 	body.rotation = Vector3.ZERO
