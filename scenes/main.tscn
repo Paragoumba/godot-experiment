@@ -18,8 +18,9 @@
 [ext_resource type="Script" path="res://scripts/Basket.gd" id="14_35c4g"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_a4ny7"]
-sky_top_color = Color(1, 0.121569, 0.47451, 1)
-sky_horizon_color = Color(0.768627, 0.545098, 0.628431, 1)
+sky_top_color = Color(0.055089, 0.254705, 0.272256, 1)
+sky_horizon_color = Color(0.896839, 0.913223, 0.425677, 1)
+sky_curve = 0.0568394
 ground_bottom_color = Color(0.0745098, 0.0588235, 0.0392157, 1)
 ground_horizon_color = Color(0.768627, 0.545098, 0.628431, 1)
 
@@ -54,15 +55,18 @@ size = Vector3(51, 0.5, 51)
 size = Vector3(200, 100, 200)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vp1wi"]
+albedo_color = Color(0.37918, 0.37918, 0.37918, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_faudo"]
 material = SubResource("StandardMaterial3D_vp1wi")
 flip_faces = true
 size = Vector3(200, 100, 200)
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0yp2x"]
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7uvya"]
 shading_mode = 0
-albedo_color = Color(0, 0.615686, 0.945098, 1)
+albedo_color = Color(0.384114, 0.663055, 0.715881, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_fymdy"]
 material = SubResource("StandardMaterial3D_7uvya")
@@ -139,7 +143,6 @@ fov = 60.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 2, 0)
-light_energy = 3.0
 
 [node name="Platform" type="StaticBody3D" parent="."]
 
