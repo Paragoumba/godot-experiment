@@ -3,7 +3,6 @@ extends Node3D
 signal world_generated
 
 @export var block: PackedScene
-@export var random: bool
 
 @onready var normal_shader: Shader = preload("res://shaders/normals.gdshader")
 
@@ -12,20 +11,14 @@ var height: int = 51
 var blockScale: float = 0.25
 var amplification = 20
 
-func _ready():
-	generate()
+@export var cx: int = 0
+@export var cz: int = 0
 
-func generate():
-	var noise = FastNoiseLite.new()
-	
-	if random:
-		noise.set_seed(Time.get_ticks_msec())
-
-	var image = noise.get_image(width, height, false, false, false)
-
+func generate(noise: Noise):
 	gen_surface(noise)
 
-	emit_signal("world_generated", image)
+	var image = noise.get_image(width, height, false, false, false)
+	world_generated.emit(image)
 
 func get_noise_2d(noise: Noise, x, y):
 	return noise.get_noise_2d(x, y) * amplification
@@ -42,25 +35,29 @@ func gen_blocks(noise: Noise):
 			add_child(b)
 
 func gen_surface(noise: Noise):
+	print("Generating chunk ", name)
+	
 	var st = SurfaceTool.new()
 	var mapdata = PackedFloat32Array()
 
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 
-	for z in range(-height/2.0, height/2.0 + 1, 1):
-		for x in range(-width/2.0, width/2.0 + 1, 1):
-			var y = get_noise_2d(noise, x, z)
-			var y2 = get_noise_2d(noise, x + 1, z + 1)
-			var y3 = get_noise_2d(noise, x, z + 1)
-			var y4 = get_noise_2d(noise, x + 1, z)
+	print(range(cx * width, cx * width + width), " ", range(cz * height, cz * height + height))
 
+	for z in range(height):
+		for x in range(width):
+			var absX = cx * width + x
+			var absZ = cz * height + z
+			
+			var y = get_noise_2d(noise, absX, absZ)
+			
 			mapdata.append(y)
-
-			if z < height/2.0 - 1 and x < width/2.0 - 1:
+			
+			if x != 0 && z != 0:
 				var v1 = Vector3(x, y, z)
-				var v2 = Vector3(x + 1, y2, z + 1)
-				var v3 = Vector3(x, y3, z + 1)
-				var v4 = Vector3(x + 1, y4, z)
+				var v2 = Vector3(x - 1, mapdata[(x - 1) + (z - 1) * height], z - 1)
+				var v3 = Vector3(x, mapdata[x + (z - 1) * height], z - 1)
+				var v4 = Vector3(x - 1, mapdata[(x - 1) + z * height], z)
 
 				# Triangle 1
 				var normal = (v4 - v1).cross(v1 - v3).normalized()
