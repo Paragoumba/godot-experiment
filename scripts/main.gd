@@ -87,6 +87,11 @@ func _unhandled_input(event):
 				window.mode = Window.MODE_FULLSCREEN
 			else:
 				window.mode = Window.MODE_WINDOWED
+
+		elif event.is_action_pressed("run"):
+			var player = $Player
+
+			player.running = !player.running
 			
 	#elif (event is InputEventMouseMotion or event is InputEventJoypadMotion) and !inventory.visible:
 		#var angleX = deg_to_rad(-event.relative.y * MOUSE_SENSIVITY)
