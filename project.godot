@@ -21,8 +21,9 @@ Utils="*res://scripts/classes/utils.gd"
 
 [display]
 
+window/size/mode=3
 window/stretch/mode="viewport"
-window/stretch/aspect="ignore"
+window/stretch/aspect="keep_width"
 mouse_cursor/custom_image="res://images/cursor.png"
 
 [input]
