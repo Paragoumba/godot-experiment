@@ -62,8 +62,6 @@ material = SubResource("StandardMaterial3D_vp1wi")
 flip_faces = true
 size = Vector3(200, 100, 200)
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0yp2x"]
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7uvya"]
 shading_mode = 0
 albedo_color = Color(0.384114, 0.663055, 0.715881, 1)
@@ -173,7 +171,6 @@ script = ExtResource("9_eqd4h")
 
 [node name="Chunk" parent="World" instance=ExtResource("4_k508y")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -50)
-physics_material_override = SubResource("PhysicsMaterial_0yp2x")
 cz = -1
 
 [node name="Chunk2" parent="World" instance=ExtResource("4_k508y")]
