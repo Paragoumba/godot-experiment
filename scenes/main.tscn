@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://dn3mkma2wyumw"]
+[gd_scene load_steps=38 format=3 uid="uid://dn3mkma2wyumw"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_jraye"]
 [ext_resource type="PackedScene" uid="uid://bwkfyd51sh80k" path="res://scenes/ui/gui.tscn" id="2_5o12m"]
@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://scripts/gui.gd" id="3_s3r0t"]
 [ext_resource type="PackedScene" uid="uid://cm0xfd2mnxbey" path="res://scenes/chunk.tscn" id="4_k508y"]
 [ext_resource type="Script" path="res://scripts/handler/god.gd" id="5_tbuek"]
-[ext_resource type="Texture2D" uid="uid://8ya7kymr6t05" path="res://images/Untitled.png" id="7_foply"]
+[ext_resource type="PackedScene" uid="uid://dbpgc5vhyqufy" path="res://scenes/platform.tscn" id="7_6n4tj"]
 [ext_resource type="PackedScene" uid="uid://m3m8whqpsgak" path="res://scenes/skybox.tscn" id="7_glnhq"]
 [ext_resource type="Script" path="res://scripts/WorldBox.gd" id="7_wgti5"]
 [ext_resource type="Script" path="res://scripts/world.gd" id="9_eqd4h"]
@@ -38,18 +38,6 @@ size = Vector3(0.1, 0.1, 0.1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_5bbe7"]
 size = Vector3(0.1, 0.1, 0.1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_jahii"]
-size = Vector3(51, 0.5, 51)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3aadf"]
-albedo_color = Color(0.180438, 0.415623, 0.775511, 1)
-albedo_texture = ExtResource("7_foply")
-texture_filter = 0
-
-[sub_resource type="BoxMesh" id="BoxMesh_q03ws"]
-material = SubResource("StandardMaterial3D_3aadf")
-size = Vector3(51, 0.5, 51)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ihecg"]
 size = Vector3(200, 100, 200)
@@ -142,18 +130,7 @@ fov = 60.0
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 2, 0)
 
-[node name="Platform" type="StaticBody3D" parent="."]
-
-[node name="Spawn" type="Marker3D" parent="Platform"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
-
-[node name="PlatformShape" type="CollisionShape3D" parent="Platform"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
-shape = SubResource("BoxShape3D_jahii")
-
-[node name="PlatformMesh" type="MeshInstance3D" parent="Platform"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
-mesh = SubResource("BoxMesh_q03ws")
+[node name="Platform" parent="." instance=ExtResource("7_6n4tj")]
 
 [node name="WorldBox" type="Area3D" parent="."]
 script = ExtResource("7_wgti5")
