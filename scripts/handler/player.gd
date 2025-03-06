@@ -50,14 +50,14 @@ func _physics_process(delta):
 	var input_dir = Input.get_vector("leftward", "rightward", "forward", "backward")
 
 	var trueSpeed = SPEED * 2 if running else SPEED
-	
+
 	input_dir = input_dir.rotated(-rotation.y) * trueSpeed
 
 	velocity.x = input_dir.x
 	velocity.z = input_dir.y
 
 	move_and_slide()
-	
+
 func _input(event):
 	if !inventory.visible:
 		var relative = Vector2()

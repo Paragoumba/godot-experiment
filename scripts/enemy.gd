@@ -25,11 +25,11 @@ func _ready():
 func _process(delta):
 	if dead:
 		return
-	
+
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
-	
+
 	var path = astar.get_point_path(0, 1)
 
 	if current_astar_index < path.size():
