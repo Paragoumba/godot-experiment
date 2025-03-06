@@ -30,9 +30,9 @@ func processCameraRotation(relative: Vector2):
 	player.rotate_y(angleY)
 
 func _ready():
-	load_nodes()
+	bootstrap()
 
-func load_nodes():
+func bootstrap():
 	inventory = $/root/Root/UI/Inventory
 	player = $/root/Root/Player
 	camera = $/root/Root/Player/FirstPersonCamera
