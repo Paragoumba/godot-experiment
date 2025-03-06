@@ -1,8 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://bwkfyd51sh80k"]
+[gd_scene load_steps=7 format=3 uid="uid://bwkfyd51sh80k"]
 
 [ext_resource type="PackedScene" uid="uid://dbbn7f2xtxcup" path="res://scenes/ui/inventory.tscn" id="1_8h6rr"]
 [ext_resource type="PackedScene" uid="uid://dbgag38hi6plh" path="res://scenes/ui/map.tscn" id="2_lyixr"]
+[ext_resource type="Script" uid="uid://cn6csoew3t40q" path="res://scenes/ui/compass.gd" id="3_3irm5"]
 [ext_resource type="Script" uid="uid://btx6so1nm8lg7" path="res://scripts/debug.gd" id="3_bb880"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_jpwlr"]
+font_size = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_6rt73"]
+font_size = 10
 
 [node name="UI" type="MarginContainer"]
 anchors_preset = 15
@@ -45,3 +52,22 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 text = "Count: 0"
+
+[node name="Compass" type="CenterContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 0
+script = ExtResource("3_3irm5")
+FOV = 3.14159
+labelSettings = SubResource("LabelSettings_jpwlr")
+
+[node name="Line2D" type="Line2D" parent="Compass"]
+points = PackedVector2Array(0, 0, 50, 0, 100, 0)
+width = 1.0
+
+[node name="Label" type="Label" parent="Compass"]
+visible = false
+layout_mode = 2
+text = "North"
+label_settings = SubResource("LabelSettings_6rt73")
+horizontal_alignment = 1
+max_lines_visible = 1
