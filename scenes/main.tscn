@@ -263,6 +263,7 @@ shape = SubResource("ConcavePolygonShape3D_ajohh")
 shape = SubResource("CylinderShape3D_ogvt0")
 
 [connection signal="debug_toggled" from="." to="UI" method="_on_node_3d_debug_toggled"]
+[connection signal="changedChunk" from="Player" to="World" method="_on_player_changed_chunk"]
 [connection signal="body_exited" from="WorldBox" to="WorldBox" method="_on_body_exited"]
 [connection signal="ball_entered_basket" from="Basket" to="UI" method="_on_basket_ball_entered_basket"]
 [connection signal="body_entered" from="Basket/Area3D" to="Basket" method="_on_area_3d_body_entered"]

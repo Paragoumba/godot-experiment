@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+signal changedChunk
+
 const MOUSE_SENSIVITY = 0.3
 const CONTROLLER_SENSIVITY = 1.5 # TODO Not smooth
 const SPEED = 5.0
@@ -15,6 +17,8 @@ var animationPlayer: AnimationPlayer
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+
+var oldPos: Vector3
 
 func processCameraRotation(relative: Vector2):
 	var angleX = deg_to_rad(-relative.x)
@@ -38,6 +42,8 @@ func bootstrap():
 	camera = $/root/Root/Player/FirstPersonCamera
 	animationPlayer = $'character-human'/AnimationPlayer
 
+	oldPos = position / 52
+
 func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
@@ -57,6 +63,13 @@ func _physics_process(delta):
 	velocity.z = input_dir.y
 
 	move_and_slide()
+
+	var relpos = position / 52
+
+	if abs(relpos.x - oldPos.x) >= 1 or abs(relpos.z - oldPos.y) >= 1:
+		oldPos = relpos
+		print("Emitting loading chunk")
+		changedChunk.emit(position)
 
 func _input(event):
 	if !inventory.visible:
