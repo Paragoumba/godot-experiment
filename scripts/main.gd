@@ -64,8 +64,8 @@ func _unhandled_input(event):
 			var player = $Player
 
 			player.set_script(godHandler if debug else playerHandler)
-			player.load_nodes()
-			
+			player.bootstrap()
+
 			if debug:
 				player.add_to_group(GOD_GROUP)
 			else:

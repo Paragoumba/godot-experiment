@@ -10,13 +10,13 @@ var player: Node
 var camera: Node
 var inventory: Node
 
-func load_nodes():
+func bootstrap():
 	player = $/root/Root/Player
 	camera = $/root/Root/Player/FirstPersonCamera
 	inventory = $/root/Root/UI/Inventory
 
 func _ready():
-	load_nodes()
+	bootstrap()
 
 func _physics_process(delta):
 	if Input.is_action_pressed("jump"):
