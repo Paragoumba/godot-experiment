@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+signal changedChunk
+
 const MOUSE_SENSIVITY = 0.3
 const SPEED = 10.0
 const JUMP_VELOCITY = 4.5
@@ -10,10 +12,14 @@ var player: Node
 var camera: Node
 var inventory: Node
 
+var oldPos: Vector3
+
 func bootstrap():
 	player = $/root/Root/Player
 	camera = $/root/Root/Player/FirstPersonCamera
 	inventory = $/root/Root/UI/Inventory
+
+	oldPos = position / 52
 
 func _ready():
 	bootstrap()
@@ -32,6 +38,15 @@ func _physics_process(delta):
 	if input_dir:
 		var trueSpeed = SPEED * 2 if running else SPEED
 		input_dir *= trueSpeed
+
+		var relpos = position / 52
+
+		# TODO Fix but position not existing
+		if abs(relpos.x - oldPos.x) >= 1 or abs(relpos.z - oldPos.y) >= 1:
+			oldPos = relpos
+			print("Emitting loading chunk")
+			changedChunk.emit(position)
+
 		position.x += input_dir.x * delta
 		position.z += input_dir.y * delta
 
