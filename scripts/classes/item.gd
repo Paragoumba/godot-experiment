@@ -1,10 +1,10 @@
 class_name Item
 
 var number: int = 0
-	
+
 func setNumber(_number: int):
 	number = _number
-		
+
 func increment():
 	number += 1
 
