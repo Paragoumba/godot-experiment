@@ -114,7 +114,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.2)
 
 [node name="FirstPersonCamera" type="Camera3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 0.879067, 0.476699, 0, -0.476699, 0.879067, 0, 0.5, -0.2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.2)
 current = true
 fov = 60.0
 
