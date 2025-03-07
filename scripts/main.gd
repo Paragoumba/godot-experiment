@@ -16,13 +16,6 @@ const GOD_GROUP = "god"
 
 var debug = false
 
-func print_child(depth, parent):
-	var path = get_path_to(parent)
-	print('-'.repeat(depth), parent, path, get_node(path) == parent)
-
-	for child in parent.get_children():
-		print_child(depth + 1, child)
-
 func capture_mouse(capture: bool):
 	if capture:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
