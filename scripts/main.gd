@@ -23,7 +23,7 @@ func print_child(depth, parent):
 	for child in parent.get_children():
 		print_child(depth + 1, child)
 
-func capture_mouse(capture):
+func capture_mouse(capture: bool):
 	if capture:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	else:
