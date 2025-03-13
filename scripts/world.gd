@@ -28,12 +28,9 @@ func _ready() -> void:
 
 	noise.set_seed(seedValue)
 
-	for c in get_children():
-		generate(c)
-
 	for i in range(-2, 3):
 		for j in range(-2, 3):
-			if (abs(i) == 2 || abs(j) == 2):
+			if (i != 0 || j != 0):
 				loadChunk(Vector2i(i, j))
 
 func computeSeed(v: String):
