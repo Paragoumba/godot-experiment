@@ -58,12 +58,15 @@ func loadChunk(pos: Vector2i):
 	if !check_chunk_exists(pos):
 		var chunk = Chunk.new()
 
+		# Add child just after instantiation, particularly before add_child because it changes the name itself.
+		# As the name is used to check if the chunk is loaded, the default name doesn't work
+		self.add_child(chunk)
+
 		chunk.name = get_chunk_name(pos)
 
 		chunk.cx = pos.x
 		chunk.cz = pos.y
 
-		self.add_child(chunk)
 		chunk.position = Vector3i(pos.x * width, 0, pos.y * height)
 
 		generate(chunk)
