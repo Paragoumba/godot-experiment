@@ -34,7 +34,7 @@ func _ready() -> void:
 	for i in range(-2, 3):
 		for j in range(-2, 3):
 			if (abs(i) == 2 || abs(j) == 2):
-				loadChunk(Vector2(i, j))
+				loadChunk(Vector2i(i, j))
 
 func computeSeed(v: String):
 	var buffer: PackedByteArray = v.to_utf16_buffer()
@@ -48,10 +48,10 @@ func computeSeed(v: String):
 
 	return temp
 
-func get_chunk_name(pos: Vector2):
+func get_chunk_name(pos: Vector2i):
 	return str(pos)
 
-func check_chunk_exists(pos: Vector2):
+func check_chunk_exists(pos: Vector2i):
 	return get_chunk_name(pos) in chunks
 
 func loadChunk(pos: Vector2i):
@@ -63,9 +63,8 @@ func loadChunk(pos: Vector2i):
 		chunk.cx = pos.x
 		chunk.cz = pos.y
 
-		chunk.position = Vector3(pos.x * width, 0, pos.y * height)
-
 		self.add_child(chunk)
+		chunk.position = Vector3i(pos.x * width, 0, pos.y * height)
 
 		generate(chunk)
 
