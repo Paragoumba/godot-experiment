@@ -7,11 +7,11 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 @onready var animationPlayer: AnimationPlayer = $'character-orc'/AnimationPlayer
 
-@onready var astar: AStar3D = AStar3D.new()
+var astar: AStar3D = AStar3D.new()
 var point = Vector3.ZERO
 
 var current_astar_index = 0
-@export var dead = false
+var dead = false
 
 func hit():
 	if !dead:
