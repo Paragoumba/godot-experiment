@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cn6dv2dvkibhe" path="res://scripts/slot.gd" id="1_gka1x"]
 [ext_resource type="Texture2D" uid="uid://bmr6mqmnwo586" path="res://images/genericItems_spritesheet_colored.png" id="2_mj1sb"]
+[ext_resource type="FontFile" uid="uid://cne7bra44wwyx" path="res://fonts/DejaVuSansMono.ttf" id="4_au628"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1kstc"]
 resource_local_to_scene = true
@@ -12,7 +13,7 @@ region = Rect2(136, 1231, 120, 110)
 
 [sub_resource type="LabelSettings" id="LabelSettings_rm18m"]
 line_spacing = 0.0
-font = SubResource("SystemFont_sad2q")
+font = ExtResource("4_au628")
 
 [node name="Slot" type="Panel"]
 custom_minimum_size = Vector2(64, 64)
