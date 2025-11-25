@@ -9,6 +9,7 @@ const RAY_LENGTH = 5
 const GOD_GROUP = "god"
 
 @onready var inventory = $UI/Inventory
+@onready var wheel = $UI/Wheel
 @onready var map = $UI/Map
 
 @export var playerHandler: Script
@@ -49,6 +50,11 @@ func _unhandled_input(event):
 			inventory.visible = !inventory.visible
 
 			capture_mouse(!inventory.visible)
+
+		elif event.is_action_pressed("open_wheel"):
+			wheel.visible = !wheel.visible
+
+			capture_mouse(!wheel.visible)
 
 		elif event.is_action_pressed("debug"):
 			debug = !debug
