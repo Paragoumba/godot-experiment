@@ -8,10 +8,11 @@ const RAY_LENGTH = 5
 
 var running: bool = true
 
-var inventory: Node
 var player: Node
 var camera: Node
 var animationPlayer: AnimationPlayer
+var inventory: Node
+var wheel: Node
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -33,10 +34,11 @@ func _ready():
 	bootstrap()
 
 func bootstrap():
-	inventory = $/root/Root/UI/Inventory
 	player = $/root/Root/Player
 	camera = $/root/Root/Player/FirstPersonCamera
 	animationPlayer = $'character-human'/AnimationPlayer
+	inventory = $/root/Root/UI/Inventory
+	wheel = $/root/Root/UI/Wheel
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -59,7 +61,7 @@ func _physics_process(delta):
 	move_and_slide()
 
 func _input(event):
-	if !inventory.visible:
+	if !inventory.visible and !wheel.visible:
 		var relative = Vector2()
 		var cameraMoved = false
 

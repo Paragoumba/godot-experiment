@@ -9,11 +9,13 @@ var running: bool = false
 var player: Node
 var camera: Node
 var inventory: Node
+var wheel: Node
 
 func bootstrap():
 	player = $/root/Root/Player
 	camera = $/root/Root/Player/FirstPersonCamera
 	inventory = $/root/Root/UI/Inventory
+	wheel = $/root/Root/UI/Wheel
 
 func _ready():
 	bootstrap()
@@ -36,7 +38,7 @@ func _physics_process(delta):
 		position.z += input_dir.y * delta
 
 func _input(event):
-	if !$/root/Root/UI/Inventory.visible:
+	if !inventory.visible and !wheel.visible:
 		if event is InputEventMouseMotion:
 			var angleX = deg_to_rad(-event.relative.y * MOUSE_SENSIVITY)
 			var angleY = deg_to_rad(-event.relative.x * MOUSE_SENSIVITY)
