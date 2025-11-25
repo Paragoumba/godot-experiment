@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bwkfyd51sh80k"]
+[gd_scene load_steps=4 format=3 uid="uid://bwkfyd51sh80k"]
 
 [ext_resource type="PackedScene" uid="uid://dbbn7f2xtxcup" path="res://scenes/ui/inventory.tscn" id="1_8h6rr"]
 [ext_resource type="PackedScene" uid="uid://dbgag38hi6plh" path="res://scenes/ui/map.tscn" id="2_lyixr"]
+[ext_resource type="Script" uid="uid://btx6so1nm8lg7" path="res://scripts/debug.gd" id="3_bb880"]
 
 [node name="UI" type="MarginContainer"]
 anchors_preset = 15
@@ -37,6 +38,7 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "Debug mode on"
+script = ExtResource("3_bb880")
 
 [node name="Counter" type="Label" parent="."]
 layout_mode = 2
